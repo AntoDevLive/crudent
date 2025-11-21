@@ -7,4 +7,6 @@ export type Cita = {
   telefono: string,
   nacimiento: string,
   observaciones: string,
+
+  eliminarCita(): void
 }

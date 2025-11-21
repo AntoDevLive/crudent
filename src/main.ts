@@ -23,8 +23,8 @@ import {
 import {v4 as uuidv4} from 'uuid';
 
 
-
-let citas: CitaType[] = localStorage.getItem('citas') ? JSON.parse(localStorage.getItem('citas')!) : [];
+//capturar citas de localstorage y convertirlas a instancias de la clase Cita
+export let citas: CitaType[] = localStorage.getItem('citas') ? JSON.parse(localStorage.getItem('citas')!).map((cita: CitaType) => new Cita(cita.id, cita.fecha, cita.nombre, cita.apellidos, cita.dni, cita.telefono, cita.nacimiento, cita.observaciones)) : [];
 
 
 
@@ -38,10 +38,14 @@ btnCita?.addEventListener('click', openModal);
 
 function openModal() {
   modal?.classList.remove('hidden');
-  formCita?.addEventListener('click', e => e.stopPropagation());
-  modal?.addEventListener('click', closeModal);
-  btnCerrar?.addEventListener('click', closeModal);
 }
+
+
+formCita?.addEventListener('click', e => e.stopPropagation());
+modal?.addEventListener('click', closeModal);
+btnCerrar?.addEventListener('click', closeModal);
+
+
 
 function closeModal() {
   modal?.classList.add('hidden');
@@ -66,12 +70,18 @@ function crearCita() {
   citas.push(cita);
 
   localStorage.setItem('citas', JSON.stringify(citas));
+
+  listarCitas();
+
+  closeModal();
 }
 
 
-function listarCitas() {
 
-  if(!tbody) return;
+
+  export function listarCitas() {
+
+  if (!tbody) return;
 
   tbody.innerHTML = '';
 
@@ -103,6 +113,8 @@ function listarCitas() {
     btnEliminar.textContent = 'Eliminar';
     btnEliminar.setAttribute('title', 'Eliminar Cita');
 
+    btnEliminar.onclick = () => cita.eliminarCita();
+
     btnsAcciones.append(btnEditar, btnEliminar);
     accionesTd.append(btnsAcciones);
     fila.append(idTd, fechaTd, dniTd, nombreTd, apellidosTd, telefonoTd, nacimientoTd, observacionesTd, accionesTd);
@@ -110,6 +122,7 @@ function listarCitas() {
   });
 
 };
+
 
 
 document.addEventListener('DOMContentLoaded', listarCitas);
