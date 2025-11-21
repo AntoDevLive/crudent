@@ -23,7 +23,7 @@ import {
 import {v4 as uuidv4} from 'uuid';
 
 
-//Declarar que citas es un array de objetos - ternario para declarar que localstorage citas puede contener valores o no. En el caso de que los contenga aseguramos que esos valores existen, en el caso de que no, devolverá un arreglo vacío
+
 let citas: CitaType[] = localStorage.getItem('citas') ? JSON.parse(localStorage.getItem('citas')!) : [];
 
 
@@ -32,6 +32,22 @@ submitForm?.addEventListener('click', e => {
   e.preventDefault();
   crearCita()
 });
+
+
+btnCita?.addEventListener('click', openModal);
+
+function openModal() {
+  modal?.classList.remove('hidden');
+  formCita?.addEventListener('click', e => e.stopPropagation());
+  modal?.addEventListener('click', closeModal);
+  btnCerrar?.addEventListener('click', closeModal);
+}
+
+function closeModal() {
+  modal?.classList.add('hidden');
+  formCita?.reset();
+}
+
 
 function crearCita() {
   let id = uuidv4();
@@ -90,7 +106,7 @@ function listarCitas() {
     btnsAcciones.append(btnEditar, btnEliminar);
     accionesTd.append(btnsAcciones);
     fila.append(idTd, fechaTd, dniTd, nombreTd, apellidosTd, telefonoTd, nacimientoTd, observacionesTd, accionesTd);
-    tbody.appendChild(fila);
+    tbody?.appendChild(fila);
   });
 
 };
