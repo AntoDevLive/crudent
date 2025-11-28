@@ -187,3 +187,10 @@ textarea {
   background-color: #ffcd38;
   color: #000;
 }
+
+header {
+  mask-image: linear-gradient(
+    black 90%,
+    transparent
+  );
+}

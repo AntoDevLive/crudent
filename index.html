@@ -80,30 +80,40 @@
   <main class="py-20 flex justify-center items-center flex-col gap-20">
   
     <!-- Citas -->
-    <section class="tabla-citas">
-      <button id="btn-cita"
-        class="text-3xl bg-sky-600 text-white py-2 px-5 rounded-lg mb-5 duration:300 transition-all hover:bg-sky-500 cursor-pointer active:scale-90">Nueva
-        Cita</button>
-  
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Fecha Cita</th>
-            <th>DNI</th>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Teléfono</th>
-            <th>Fecha Nacimiento</th>
-            <th>Observaciones</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="tbody">
-          <!-- Contenido desde LocalStorage -->
-        </tbody>
-      </table>
-    </section>
+<section class="tabla-citas flex flex-col items-center px-30 relative">
+
+      <!-- Toast -->
+      <div
+        id="toast"
+        class="absolute top-0 left-0 bg-green-500 text-white text-xl z-96 py-2 px-4 rounded-tr-md rounded-br-md shadow-lg shadow-black/50 transition-all duration-500 -translate-x-full opacity-0">
+        Cita creada correctamente</div>
+
+  <button id="btn-cita"
+    class="text-2xl bg-sky-600 text-white py-1.5 px-5 rounded-lg mb-5 duration:300 transition-all hover:bg-sky-500 cursor-pointer active:scale-90">
+    Nueva Cita
+  </button>
+
+  <div class="max-h-96 overflow-y-auto w-full shadow-lg shadow-neutral-800/50 rounded-sm">
+
+    <table class="min-w-full text-center">
+      <thead class="bg-sky-200">
+        <tr>
+          <th>ID</th>
+          <th>Fecha Cita</th>
+          <th>DNI</th>
+          <th>Nombre</th>
+          <th>Apellidos</th>
+          <th>Teléfono</th>
+          <th>Fecha Nacimiento</th>
+          <th>Observaciones</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</section>
+
   
   
   </main>
