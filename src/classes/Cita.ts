@@ -15,11 +15,12 @@ import {
   confirmarBtn,
   cancelarBtn,
   camposForm,
-  validado,
   tbody
 } from "../selectores.ts";
-import { listarCitas, citas } from "../main.ts";
+import { listarCitas, citas, openModal, closeModal } from "../main.ts";
 import type { Cita as CitaType } from "../types/Cita.ts";
+
+export let instancia: Cita | null = null;
 
 export default class Cita implements CitaType {
 
@@ -53,12 +54,10 @@ export default class Cita implements CitaType {
   }
 
 
-
   //Eliminar citas
   eliminarCita(): void {
     // Actualizar array citas
     const nuevasCitas = citas.filter((cita: CitaType) => cita.id !== this.id);
-
     citas.length = 0;
     citas.push(...nuevasCitas);
 
@@ -67,4 +66,38 @@ export default class Cita implements CitaType {
 
     listarCitas();
   }
+
+
+  // Editar citas
+  editarCita() {
+    console.log('editando', this.id);
+    openModal('editando');
+    instancia = this;
+
+    fechaInput!.value = instancia.fecha;
+    nombreInput!.value = instancia.nombre;
+    apellidosInput!.value = instancia.apellidos;
+    dniInput!.value = instancia.dni;
+    telefonoInput!.value = instancia.telefono;
+    nacimientoInput!.value = instancia.nacimiento;
+    observaciones!.value = instancia.observaciones;
+  }
+
+  static actualizar(instancia: Cita | null): void {
+
+    if (!instancia) return;
+    
+    instancia.fecha = fechaInput!.value;
+    instancia.dni = dniInput!.value;
+    instancia.nombre = nombreInput!.value;
+    instancia.apellidos = apellidosInput!.value;
+    instancia.telefono = telefonoInput!.value;
+    instancia.nacimiento = nacimientoInput!.value;
+    instancia.observaciones = observaciones!.value;
+
+    localStorage.setItem('citas', JSON.stringify(citas));
+    listarCitas();
+    closeModal();
+  }
+
 }

@@ -17,10 +17,12 @@ import {
   confirmarBtn,
   cancelarBtn,
   camposForm,
-  validado,
   tbody
 } from "./selectores.ts";
 import {v4 as uuidv4} from 'uuid';
+import { instancia } from "./classes/Cita.ts";
+
+let validado: boolean = false;
 
 
 //capturar citas de localstorage y convertirlas a instancias de la clase Cita
@@ -30,24 +32,40 @@ export let citas: CitaType[] = localStorage.getItem('citas') ? JSON.parse(localS
 
 submitForm?.addEventListener('click', e => {
   e.preventDefault();
-  crearCita()
+
+  if(submitForm?.value.toLowerCase() === 'crear') {
+    crearCita();
+  } else {
+    Cita.actualizar(instancia);
+  }
+
 });
 
 
-btnCita?.addEventListener('click', openModal);
+btnCita?.addEventListener('click', () => openModal('crear'));
 
-function openModal() {
+export function openModal(action: string) {
+
+  if(action === 'editando') {
+    submitForm!.value = 'Editar';
+  } else {
+    submitForm!.value = 'Crear';
+  }
+  
   modal?.classList.remove('hidden');
 }
 
 
 formCita?.addEventListener('click', e => e.stopPropagation());
 modal?.addEventListener('click', closeModal);
-btnCerrar?.addEventListener('click', closeModal);
+btnCerrar?.addEventListener('click', e => {
+  e.preventDefault();
+  closeModal();
+});
 
 
 
-function closeModal() {
+export function closeModal() {
   modal?.classList.add('hidden');
   formCita?.reset();
 }
@@ -114,6 +132,7 @@ function crearCita() {
     btnEliminar.setAttribute('title', 'Eliminar Cita');
 
     btnEliminar.onclick = () => cita.eliminarCita();
+    btnEditar.onclick = () => cita.editarCita();
 
     btnsAcciones.append(btnEditar, btnEliminar);
     accionesTd.append(btnsAcciones);
@@ -122,6 +141,9 @@ function crearCita() {
   });
 
 };
+
+
+
 
 
 

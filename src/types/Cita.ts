@@ -9,4 +9,5 @@ export type Cita = {
   observaciones: string,
 
   eliminarCita(): void
+  editarCita(): void
 }

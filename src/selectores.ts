@@ -14,5 +14,4 @@ export const modalAlerta = document.querySelector('#modal-alerta') as HTMLDivEle
 export const confirmarBtn = document.querySelector('#confirmar-btn') as HTMLButtonElement | null;
 export const cancelarBtn = document.querySelector('#cancelar-btn') as HTMLButtonElement | null;
 export let camposForm = [fechaInput, nombreInput, apellidosInput, dniInput, telefonoInput, nacimientoInput] as (HTMLInputElement | null)[];
-export let validado: boolean = false;
 export const tbody = document.querySelector('#tbody') as HTMLTableSectionElement | null;
