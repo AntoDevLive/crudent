@@ -17,7 +17,7 @@ import {
   camposForm,
   tbody
 } from "../selectores.ts";
-import { listarCitas, citas, openModal, closeModal } from "../main.ts";
+import { citas, openModal, closeModal } from "../main.ts";
 import type { Cita as CitaType } from "../types/Cita.ts";
 
 export let instancia: Cita | null = null;
@@ -64,7 +64,7 @@ export default class Cita implements CitaType {
     // Actualizar LS
     localStorage.setItem('citas', JSON.stringify(citas));
 
-    listarCitas();
+    Cita.listarCitas();
   }
 
 
@@ -96,8 +96,55 @@ export default class Cita implements CitaType {
     instancia.observaciones = observaciones!.value;
 
     localStorage.setItem('citas', JSON.stringify(citas));
-    listarCitas();
+    Cita.listarCitas();
     closeModal();
   }
+
+
+  // Listar citas
+  static listarCitas() {
+
+  if (!tbody) return;
+
+  tbody.innerHTML = '';
+
+  citas.forEach((cita: CitaType) => {
+    const fila = document.createElement('tr');
+    const idTd = document.createElement('td');
+    const fechaTd = document.createElement('td');
+    const dniTd = document.createElement('td');
+    const nombreTd = document.createElement('td');
+    const apellidosTd = document.createElement('td');
+    const telefonoTd = document.createElement('td');
+    const nacimientoTd = document.createElement('td');
+    const observacionesTd = document.createElement('td');
+    const accionesTd = document.createElement('td');
+    const btnsAcciones = document.createElement('div');
+    const btnEditar = document.createElement('button');
+    const btnEliminar = document.createElement('button');
+
+    idTd.textContent = cita.id;
+    fechaTd.textContent = cita.fecha;
+    dniTd.textContent = cita.dni;
+    nombreTd.textContent = cita.nombre;
+    apellidosTd.textContent = cita.apellidos;
+    telefonoTd.textContent = cita.telefono;
+    nacimientoTd.textContent = cita.nacimiento;
+    observacionesTd.textContent = cita.observaciones;
+    btnEditar.textContent = 'Editar';
+    btnEditar.setAttribute('title', 'Editar Cita');
+    btnEliminar.textContent = 'Eliminar';
+    btnEliminar.setAttribute('title', 'Eliminar Cita');
+
+    btnEliminar.onclick = () => cita.eliminarCita();
+    btnEditar.onclick = () => cita.editarCita();
+
+    btnsAcciones.append(btnEditar, btnEliminar);
+    accionesTd.append(btnsAcciones);
+    fila.append(idTd, fechaTd, dniTd, nombreTd, apellidosTd, telefonoTd, nacimientoTd, observacionesTd, accionesTd);
+    tbody?.appendChild(fila);
+  });
+
+};
 
 }
