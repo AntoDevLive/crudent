@@ -8,6 +8,6 @@ export type Cita = {
   nacimiento: string,
   observaciones: string,
 
-  eliminarCita(): void
+  mostrarDialog(): void;
   editarCita(): void
 }

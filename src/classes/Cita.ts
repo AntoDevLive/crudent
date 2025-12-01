@@ -53,18 +53,31 @@ export default class Cita implements CitaType {
     this.observaciones = observaciones;
   }
 
+  // Dialog
+  mostrarDialog(): void {
+    instancia = this;
+    openModal('eliminar');
+    confirmarBtn?.addEventListener('click', () => Cita.eliminarCita(instancia));
+  }
+
 
   //Eliminar citas
-  eliminarCita(): void {
-    // Actualizar array citas
-    const nuevasCitas = citas.filter((cita: CitaType) => cita.id !== this.id);
-    citas.length = 0;
-    citas.push(...nuevasCitas);
+  static eliminarCita(instancia: Cita | null): void {
 
-    // Actualizar LS
-    localStorage.setItem('citas', JSON.stringify(citas));
+    if(!instancia) return;
 
-    Cita.listarCitas();
+    // // Actualizar array citas
+    // const nuevasCitas = citas.filter((cita: CitaType) => cita.id !== this.id);
+    // citas.length = 0;
+    // citas.push(...nuevasCitas);
+
+    // // Actualizar LS
+    // localStorage.setItem('citas', JSON.stringify(citas));
+
+    // Cita.listarCitas();
+
+    console.log('eliminando', instancia.id);
+    instancia = null;
   }
 
 
@@ -97,6 +110,7 @@ export default class Cita implements CitaType {
 
     localStorage.setItem('citas', JSON.stringify(citas));
     Cita.listarCitas();
+    instancia = null;
     closeModal();
   }
 
@@ -136,7 +150,7 @@ export default class Cita implements CitaType {
     btnEliminar.textContent = 'Eliminar';
     btnEliminar.setAttribute('title', 'Eliminar Cita');
 
-    btnEliminar.onclick = () => cita.eliminarCita();
+    btnEliminar.onclick = () => cita.mostrarDialog();
     btnEditar.onclick = () => cita.editarCita();
 
     btnsAcciones.append(btnEditar, btnEliminar);

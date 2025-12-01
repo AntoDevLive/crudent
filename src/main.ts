@@ -17,7 +17,8 @@ import {
   confirmarBtn,
   cancelarBtn,
   camposForm,
-  tbody
+  tbody,
+  dialog
 } from "./selectores.ts";
 import {v4 as uuidv4} from 'uuid';
 import { instancia } from "./classes/Cita.ts";
@@ -44,16 +45,31 @@ submitForm?.addEventListener('click', e => {
 
 btnCita?.addEventListener('click', () => openModal('crear'));
 
+
+
+// Handle modal
 export function openModal(action: string) {
 
-  if(action === 'editando') {
+  if(action.toLowerCase() === 'editando') {
     submitForm!.value = 'Editar';
-  } else {
+  } else if (action.toLowerCase() === 'crear') {
     submitForm!.value = 'Crear';
+  } else {
+    formCita?.classList.add('hidden');
+    dialog?.classList.remove('hidden')
   }
   
   modal?.classList.remove('hidden');
 }
+
+
+export function closeModal() {
+  modal?.classList.add('hidden');
+  formCita?.classList.remove('hidden');
+  dialog?.classList.add('hidden');
+  formCita?.reset();
+}
+
 
 
 formCita?.addEventListener('click', e => e.stopPropagation());
@@ -65,10 +81,7 @@ btnCerrar?.addEventListener('click', e => {
 
 
 
-export function closeModal() {
-  modal?.classList.add('hidden');
-  formCita?.reset();
-}
+
 
 
 function crearCita() {

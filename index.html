@@ -1,90 +1,105 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="src/style.css">
-    <title>crudent_ts</title>
-  </head>
-  <body>
 
-      <div id="modal" class="hidden">
-        <div class="fixed inset-0 bg-black/50 z-90 flex justify-center items-center">
-          <form id="form-cita" class="bg-sky-100 p-8 relative rounded-lg shadow-lg/50 flex flex-col gap-4 w-[600px]">
-      
-            <!-- Btn cerrar modal -->
-            <button title="cerrar" id="btn-cerrar"
-              class="p-1 bg-red-500 rounded-full absolute -top-2 -right-2 cursor-pointer duration-300 hover:bg-red-400">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff"
-                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                class="icon icon-tabler icons-tabler-outline icon-tabler-x">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M18 6l-12 12" />
-                <path d="M6 6l12 12" />
-              </svg>
-            </button>
-      
-            <!-- Fecha de la cita -->
-            <fieldset class="flex flex-col justify-center items-center  text-xl w-full">
-              <legend class="font-semibold text-center">Fecha de la cita</legend>
-              <div class="input-container flex flex-col justify-center items-center w-[90%]">
-                <input type="datetime-local" id="fecha-cita" class="w-full" required>
-              </div>
-            </fieldset>
-      
-            <!-- Información del paciente -->
-            <fieldset class="flex flex-col justify-center items-center gap-6 text-xl w-[90%] m-auto">
-              <legend class="font-semibold text-center">Información del paciente</legend>
-      
-              <div class="grid grid-cols-2 place-items-center gap-5">
-                <div class="input-container flex flex-col items-center gap-1 w-full">
-                  <input id="nombre" type="text" placeholder="Nombre" class="w-full">
-                </div>
-                <div class="input-container flex flex-col items-center gap-1 w-full">
-                  <input id="apellidos" type="text" placeholder="Apellidos" class="w-full">
-                </div>
-                <div class="input-container flex flex-col items-center gap-1 w-full">
-                  <input id="dni" type="text" placeholder="DNI" class="w-full">
-                </div>
-                <div class="input-container flex flex-col items-center gap-1 w-full">
-                  <input id="telefono" type="number" placeholder="Teléfono" class="w-full">
-                </div>
-              </div>
-      
-              <!-- Fecha de nacimiento -->
-              <div class="input-container flex flex-col justify-center items-center gap-2 text-xl w-full">
-                <label for="fecha-nacimiento">Fecha de nacimiento</label>
-                <input type="date" id="fecha-nacimiento" class="w-full">
-              </div>
-      
-              <!-- Observaciones -->
-              <div class="input-container flex flex-col justify-center items-center gap-2 text-xl w-full">
-                <label for="observaciones">Observaciones</label>
-                <textarea id="observaciones" class="bg-white h-50 w-full p-2 resize-none rounded-sm outline-none"></textarea>
-              </div>
-            </fieldset>
-      
-            <input id="submit-form" class="text-2xl cursor-pointer" type="submit" value="Crear Cita">
-          </form>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="src/style.css">
+  <title>crudent_ts</title>
+</head>
+
+<body>
+
+  <div id="modal" class="hidden">
+    <div class="fixed inset-0 bg-black/50 z-90 flex justify-center items-center">
+      <form id="form-cita" class="bg-sky-100 p-8 relative rounded-lg shadow-lg/50 flex flex-col gap-4 w-[600px]">
+
+        <!-- Btn cerrar modal -->
+        <button title="cerrar" id="btn-cerrar"
+          class="p-1 bg-red-500 rounded-full absolute -top-2 -right-2 cursor-pointer duration-300 hover:bg-red-400">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M18 6l-12 12" />
+            <path d="M6 6l12 12" />
+          </svg>
+        </button>
+
+        <!-- Fecha de la cita -->
+        <fieldset class="flex flex-col justify-center items-center  text-xl w-full">
+          <legend class="font-semibold text-center">Fecha de la cita</legend>
+          <div class="input-container flex flex-col justify-center items-center w-[90%]">
+            <input type="datetime-local" id="fecha-cita" class="w-full" required>
+          </div>
+        </fieldset>
+
+        <!-- Información del paciente -->
+        <fieldset class="flex flex-col justify-center items-center gap-6 text-xl w-[90%] m-auto">
+          <legend class="font-semibold text-center">Información del paciente</legend>
+
+          <div class="grid grid-cols-2 place-items-center gap-5">
+            <div class="input-container flex flex-col items-center gap-1 w-full">
+              <input id="nombre" type="text" placeholder="Nombre" class="w-full">
+            </div>
+            <div class="input-container flex flex-col items-center gap-1 w-full">
+              <input id="apellidos" type="text" placeholder="Apellidos" class="w-full">
+            </div>
+            <div class="input-container flex flex-col items-center gap-1 w-full">
+              <input id="dni" type="text" placeholder="DNI" class="w-full">
+            </div>
+            <div class="input-container flex flex-col items-center gap-1 w-full">
+              <input id="telefono" type="number" placeholder="Teléfono" class="w-full">
+            </div>
+          </div>
+
+          <!-- Fecha de nacimiento -->
+          <div class="input-container flex flex-col justify-center items-center gap-2 text-xl w-full">
+            <label for="fecha-nacimiento">Fecha de nacimiento</label>
+            <input type="date" id="fecha-nacimiento" class="w-full">
+          </div>
+
+          <!-- Observaciones -->
+          <div class="input-container flex flex-col justify-center items-center gap-2 text-xl w-full">
+            <label for="observaciones">Observaciones</label>
+            <textarea id="observaciones"
+              class="bg-white h-50 w-full p-2 resize-none rounded-sm outline-none"></textarea>
+          </div>
+        </fieldset>
+
+        <input id="submit-form" class="text-2xl cursor-pointer" type="submit" value="Crear Cita">
+      </form>
+    </div>
+
+    <!-- Dialog -->
+    <div id="dialog" class="flex justify-center items-center flex-col gap-4 bg-neutral-200 py-6 px-5 absolute top-2/4 left-2/4 -translate-2/4 z-96 rounded-lg shadow-lg shadow-black/50 hidden">
+      <div class="flex justify-center items-center flex-col text-xl">
+        <p>¿Seguro que deseas eliminar esta cita?</p>
+        <p>Esta acción no podrá deshacerse</p>
       </div>
-    
+      <div class="flex justify-center items-center gap-4">
+        <button id="confirmar-btn" class="bg-red-500 text-white text-lg rounded-md py-1 px-2 cursor-pointer transition-all duration-200 hover:bg-red-500/90">Eliminar</button>
+        <button id="cancelar-btn" class="bg-gray-500 text-white text-lg rounded-md py-1 px-2 cursor-pointer transition-all duration-200 hover:bg-gray-500/90">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
   <header class="h-50 bg-[url(/bg-dental.jpg)] bg-no-repeat bg-cover bg-bottom relative">
-  
+
     <div class="absolute inset-0 flex justify-center items-center backdrop-blur-xs bg-green-200/50">
       <img src="/logo.png" alt="" class="w-50 ">
     </div>
   </header>
-  
-  
+
+
   <main class="py-20 flex justify-center items-center flex-col gap-20">
-  
+
     <!-- Citas -->
     <section class="tabla-citas">
       <button id="btn-cita"
         class="text-3xl bg-sky-600 text-white py-2 px-5 rounded-lg mb-5 duration:300 transition-all hover:bg-sky-500 cursor-pointer active:scale-90">Nueva
         Cita</button>
-  
+
       <table>
         <thead>
           <tr>
@@ -104,12 +119,13 @@
         </tbody>
       </table>
     </section>
-  
-  
+
+
   </main>
 
 
 
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>

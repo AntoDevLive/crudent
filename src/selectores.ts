@@ -15,3 +15,4 @@ export const confirmarBtn = document.querySelector('#confirmar-btn') as HTMLButt
 export const cancelarBtn = document.querySelector('#cancelar-btn') as HTMLButtonElement | null;
 export let camposForm = [fechaInput, nombreInput, apellidosInput, dniInput, telefonoInput, nacimientoInput] as (HTMLInputElement | null)[];
 export const tbody = document.querySelector('#tbody') as HTMLTableSectionElement | null;
+export const dialog = document.querySelector('#dialog') as HTMLDivElement | null;
