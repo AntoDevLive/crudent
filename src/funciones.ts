@@ -19,9 +19,6 @@ import {
   toast,
   dialog
 } from "./selectores.ts";
-import { citas, } from "./main.ts";
-import type { Cita as CitaType } from "./types/Cita.ts";
-import Cita from "./classes/Cita.ts";
 
 
 //Handle toast

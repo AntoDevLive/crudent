@@ -1,6 +1,4 @@
 import {
-  btnCita,
-  formCita,
   fechaInput,
   nombreInput,
   apellidosInput,
@@ -8,13 +6,7 @@ import {
   telefonoInput,
   nacimientoInput,
   observaciones,
-  submitForm,
-  btnCerrar,
-  modal,
-  modalAlerta,
   confirmarBtn,
-  cancelarBtn,
-  camposForm,
   tbody
 } from "../selectores.ts";
 import { citas } from "../main.ts";
@@ -56,40 +48,38 @@ export default class Cita implements CitaType {
   }
 
 
-// Crear citas 
- static crearCita() {
-  let id = uuidv4();
+  // Crear citas 
+  static crearCita() {
+    let id = uuidv4();
 
-  const cita = new Cita(
-    id,
-    fechaInput?.value ?? "",
-    nombreInput?.value ?? "",
-    apellidosInput?.value ?? "",
-    dniInput?.value ?? "",
-    telefonoInput?.value ?? "",
-    nacimientoInput?.value ?? "",
-    observaciones?.value ?? ""
-  );
+    const cita = new Cita(
+      id,
+      fechaInput?.value ?? "",
+      nombreInput?.value ?? "",
+      apellidosInput?.value ?? "",
+      dniInput?.value ?? "",
+      telefonoInput?.value ?? "",
+      nacimientoInput?.value ?? "",
+      observaciones?.value ?? ""
+    );
 
-  citas.push(cita);
+    citas.push(cita);
 
-  localStorage.setItem('citas', JSON.stringify(citas));
+    localStorage.setItem('citas', JSON.stringify(citas));
 
-  Cita.listarCitas();
+    Cita.listarCitas();
 
-  closeModal();
+    closeModal();
 
-  mostrarToast('Cita creada correctamente');
+    mostrarToast('Cita creada correctamente');
 
-  setTimeout(() => {
-    ocultarToast();
-  }, 2500);
-}
-
+    setTimeout(() => {
+      ocultarToast();
+    }, 2500);
+  }
 
 
   //Eliminar citas
-
   // Dialog
   mostrarDialog(): void {
     instancia = this;
@@ -99,7 +89,7 @@ export default class Cita implements CitaType {
 
   static eliminarCita(instancia: Cita | null): void {
 
-    if(!instancia) return;
+    if (!instancia) return;
 
     // Actualizar array citas
     const nuevasCitas = citas.filter((cita: CitaType) => cita.id !== instancia?.id);
@@ -141,7 +131,7 @@ export default class Cita implements CitaType {
   static actualizar(instancia: Cita | null): void {
 
     if (!instancia) return;
-    
+
     instancia.fecha = fechaInput!.value;
     instancia.dni = dniInput!.value;
     instancia.nombre = nombreInput!.value;
@@ -154,7 +144,7 @@ export default class Cita implements CitaType {
     Cita.listarCitas();
 
     closeModal();
-    
+
     mostrarToast('Cita Modificada correctamente');
 
     setTimeout(() => {
@@ -168,47 +158,47 @@ export default class Cita implements CitaType {
   // Listar citas
   static listarCitas() {
 
-  if (!tbody) return;
+    if (!tbody) return;
 
-  tbody.innerHTML = '';
+    tbody.innerHTML = '';
 
-  citas.forEach((cita: CitaType) => {
-    const fila = document.createElement('tr');
-    const idTd = document.createElement('td');
-    const fechaTd = document.createElement('td');
-    const dniTd = document.createElement('td');
-    const nombreTd = document.createElement('td');
-    const apellidosTd = document.createElement('td');
-    const telefonoTd = document.createElement('td');
-    const nacimientoTd = document.createElement('td');
-    const observacionesTd = document.createElement('td');
-    const accionesTd = document.createElement('td');
-    const btnsAcciones = document.createElement('div');
-    const btnEditar = document.createElement('button');
-    const btnEliminar = document.createElement('button');
+    citas.forEach((cita: CitaType) => {
+      const fila = document.createElement('tr');
+      const idTd = document.createElement('td');
+      const fechaTd = document.createElement('td');
+      const dniTd = document.createElement('td');
+      const nombreTd = document.createElement('td');
+      const apellidosTd = document.createElement('td');
+      const telefonoTd = document.createElement('td');
+      const nacimientoTd = document.createElement('td');
+      const observacionesTd = document.createElement('td');
+      const accionesTd = document.createElement('td');
+      const btnsAcciones = document.createElement('div');
+      const btnEditar = document.createElement('button');
+      const btnEliminar = document.createElement('button');
 
-    idTd.textContent = cita.id;
-    fechaTd.textContent = cita.fecha;
-    dniTd.textContent = cita.dni;
-    nombreTd.textContent = cita.nombre;
-    apellidosTd.textContent = cita.apellidos;
-    telefonoTd.textContent = cita.telefono;
-    nacimientoTd.textContent = cita.nacimiento;
-    observacionesTd.textContent = cita.observaciones;
-    btnEditar.textContent = 'Editar';
-    btnEditar.setAttribute('title', 'Editar Cita');
-    btnEliminar.textContent = 'Eliminar';
-    btnEliminar.setAttribute('title', 'Eliminar Cita');
+      idTd.textContent = cita.id;
+      fechaTd.textContent = cita.fecha;
+      dniTd.textContent = cita.dni;
+      nombreTd.textContent = cita.nombre;
+      apellidosTd.textContent = cita.apellidos;
+      telefonoTd.textContent = cita.telefono;
+      nacimientoTd.textContent = cita.nacimiento;
+      observacionesTd.textContent = cita.observaciones;
+      btnEditar.textContent = 'Editar';
+      btnEditar.setAttribute('title', 'Editar Cita');
+      btnEliminar.textContent = 'Eliminar';
+      btnEliminar.setAttribute('title', 'Eliminar Cita');
 
-    btnEliminar.onclick = () => cita.mostrarDialog();
-    btnEditar.onclick = () => cita.editarCita();
+      btnEliminar.onclick = () => cita.mostrarDialog();
+      btnEditar.onclick = () => cita.editarCita();
 
-    btnsAcciones.append(btnEditar, btnEliminar);
-    accionesTd.append(btnsAcciones);
-    fila.append(idTd, fechaTd, dniTd, nombreTd, apellidosTd, telefonoTd, nacimientoTd, observacionesTd, accionesTd);
-    tbody?.appendChild(fila);
-  });
+      btnsAcciones.append(btnEditar, btnEliminar);
+      accionesTd.append(btnsAcciones);
+      fila.append(idTd, fechaTd, dniTd, nombreTd, apellidosTd, telefonoTd, nacimientoTd, observacionesTd, accionesTd);
+      tbody?.appendChild(fila);
+    });
 
-};
+  };
 
 }
