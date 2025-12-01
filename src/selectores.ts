@@ -19,3 +19,4 @@ export const dialog = document.querySelector('#dialog') as HTMLDivElement | null
 export const toast = document.querySelector('#toast') as HTMLDivElement | null;
 export const dniPattern = /^\d{8}[A-Za-z]$/;
 export let errorMsg = document.createElement('p');
+export const yearCopy = document.querySelector('#year-copy');

@@ -1,6 +1,6 @@
 import type { Cita as CitaType } from "./types/Cita.ts";
 import Cita from "./classes/Cita.ts";
-import { btnCita, formCita, submitForm, btnCerrar, modal, cancelarBtn, fechaInput, nacimientoInput, dialog } from "./selectores.ts";
+import { btnCita, formCita, submitForm, btnCerrar, modal, cancelarBtn, fechaInput, nacimientoInput, dialog, yearCopy } from "./selectores.ts";
 import { instancia } from "./classes/Cita.ts";
 import { openModal, closeModal, validarFormulario, getFechaActual, getFechaActualFormatoLocal } from "./funciones.ts";
 
@@ -41,7 +41,7 @@ btnCerrar?.addEventListener('click', e => {
 document.addEventListener('DOMContentLoaded', () => {
   Cita.listarCitas();
 
-  // 1. Impedir elegir fechas anteriores para la cita
+  // Impedir elegir fechas anteriores para la cita
   if (fechaInput) {
     const fechaMinima = getFechaActualFormatoLocal();
     fechaInput.min = fechaMinima;
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Impedir fechas de nacimiento posteriores a hoy
+  // Impedir fechas de nacimiento posteriores a hoy
   if (nacimientoInput) {
     const hoy = getFechaActual();
     nacimientoInput.max = hoy;
@@ -65,4 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Copyright footer
+  yearCopy!.textContent = new Date().getFullYear().toString();
 });
