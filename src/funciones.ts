@@ -16,9 +16,10 @@ import {
   cancelarBtn,
   camposForm,
   tbody,
-  toast
+  toast,
+  dialog
 } from "./selectores.ts";
-import { citas, openModal, closeModal } from "./main.ts";
+import { citas, } from "./main.ts";
 import type { Cita as CitaType } from "./types/Cita.ts";
 import Cita from "./classes/Cita.ts";
 
@@ -33,4 +34,28 @@ export function mostrarToast(msg: string) {
 export function ocultarToast() {
   toast?.classList.add('opacity-0');
   toast?.classList.add('-translate-x-full');
+}
+
+
+// Handle modal
+export function openModal(action: string) {
+
+  if (action.toLowerCase() === 'editando') {
+    submitForm!.value = 'Editar';
+  } else if (action.toLowerCase() === 'crear') {
+    submitForm!.value = 'Crear';
+  } else {
+    formCita?.classList.add('hidden');
+    dialog?.classList.remove('hidden')
+  }
+
+  modal?.classList.remove('hidden');
+}
+
+
+export function closeModal() {
+  modal?.classList.add('hidden');
+  formCita?.classList.remove('hidden');
+  dialog?.classList.add('hidden');
+  formCita?.reset();
 }

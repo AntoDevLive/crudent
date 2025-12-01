@@ -17,9 +17,10 @@ import {
   camposForm,
   tbody
 } from "../selectores.ts";
-import { citas, openModal, closeModal } from "../main.ts";
+import { citas } from "../main.ts";
 import type { Cita as CitaType } from "../types/Cita.ts";
-import { mostrarToast, ocultarToast } from "../funciones.ts";
+import { mostrarToast, ocultarToast, openModal, closeModal } from "../funciones.ts";
+import { v4 as uuidv4 } from 'uuid';
 
 export let instancia: Cita | null = null;
 
@@ -55,6 +56,38 @@ export default class Cita implements CitaType {
   }
 
 
+// Crear citas 
+ static crearCita() {
+  let id = uuidv4();
+
+  const cita = new Cita(
+    id,
+    fechaInput?.value ?? "",
+    nombreInput?.value ?? "",
+    apellidosInput?.value ?? "",
+    dniInput?.value ?? "",
+    telefonoInput?.value ?? "",
+    nacimientoInput?.value ?? "",
+    observaciones?.value ?? ""
+  );
+
+  citas.push(cita);
+
+  localStorage.setItem('citas', JSON.stringify(citas));
+
+  Cita.listarCitas();
+
+  closeModal();
+
+  mostrarToast('Cita creada correctamente');
+
+  setTimeout(() => {
+    ocultarToast();
+  }, 2500);
+}
+
+
+
   //Eliminar citas
 
   // Dialog
@@ -85,6 +118,8 @@ export default class Cita implements CitaType {
     }, 2500);
 
     instancia = null;
+
+    closeModal();
   }
 
 
