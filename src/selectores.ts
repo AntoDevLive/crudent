@@ -17,3 +17,5 @@ export let camposForm = [fechaInput, nombreInput, apellidosInput, dniInput, tele
 export const tbody = document.querySelector('#tbody') as HTMLTableSectionElement | null;
 export const dialog = document.querySelector('#dialog') as HTMLDivElement | null;
 export const toast = document.querySelector('#toast') as HTMLDivElement | null;
+export const dniPattern = /^\d{8}[A-Za-z]$/;
+export let errorMsg = document.createElement('p');
