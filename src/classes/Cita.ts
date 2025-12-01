@@ -19,6 +19,7 @@ import {
 } from "../selectores.ts";
 import { citas, openModal, closeModal } from "../main.ts";
 import type { Cita as CitaType } from "../types/Cita.ts";
+import { mostrarToast, ocultarToast } from "../funciones.ts";
 
 export let instancia: Cita | null = null;
 
@@ -53,6 +54,9 @@ export default class Cita implements CitaType {
     this.observaciones = observaciones;
   }
 
+
+  //Eliminar citas
+
   // Dialog
   mostrarDialog(): void {
     instancia = this;
@@ -60,23 +64,26 @@ export default class Cita implements CitaType {
     confirmarBtn?.addEventListener('click', () => Cita.eliminarCita(instancia));
   }
 
-
-  //Eliminar citas
   static eliminarCita(instancia: Cita | null): void {
 
     if(!instancia) return;
 
-    // // Actualizar array citas
-    // const nuevasCitas = citas.filter((cita: CitaType) => cita.id !== this.id);
-    // citas.length = 0;
-    // citas.push(...nuevasCitas);
+    // Actualizar array citas
+    const nuevasCitas = citas.filter((cita: CitaType) => cita.id !== instancia?.id);
+    citas.length = 0;
+    citas.push(...nuevasCitas);
 
-    // // Actualizar LS
-    // localStorage.setItem('citas', JSON.stringify(citas));
+    // Actualizar LS
+    localStorage.setItem('citas', JSON.stringify(citas));
 
-    // Cita.listarCitas();
+    Cita.listarCitas();
 
-    console.log('eliminando', instancia.id);
+    mostrarToast('Cita eliminada correctamente');
+
+    setTimeout(() => {
+      ocultarToast();
+    }, 2500);
+
     instancia = null;
   }
 
@@ -110,8 +117,16 @@ export default class Cita implements CitaType {
 
     localStorage.setItem('citas', JSON.stringify(citas));
     Cita.listarCitas();
-    instancia = null;
+
     closeModal();
+    
+    mostrarToast('Cita Modificada correctamente');
+
+    setTimeout(() => {
+      ocultarToast();
+    }, 2500);
+
+    instancia = null;
   }
 
 

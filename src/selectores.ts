@@ -16,3 +16,4 @@ export const cancelarBtn = document.querySelector('#cancelar-btn') as HTMLButton
 export let camposForm = [fechaInput, nombreInput, apellidosInput, dniInput, telefonoInput, nacimientoInput] as (HTMLInputElement | null)[];
 export const tbody = document.querySelector('#tbody') as HTMLTableSectionElement | null;
 export const dialog = document.querySelector('#dialog') as HTMLDivElement | null;
+export const toast = document.querySelector('#toast') as HTMLDivElement | null;
